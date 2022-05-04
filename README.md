@@ -1,9 +1,5 @@
 # int-test Project
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
-
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
-
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
@@ -54,15 +50,14 @@ Integration tests can be run using the artifact created during build stage.
 ./gradlew build quarkusIntTest -Dquarkus.package.type=native -Dquarkus.native.container-build=true --info
 ```
 
-## Related Guides
+### Independent build and integration tests
+ 
+Run below to create the application binary. In this case a native executable is being created.
+```shell
+./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true
+```
 
-- Kotlin ([guide](https://quarkus.io/guides/kotlin)): Write your services in Kotlin
-- RESTEasy Classic ([guide](https://quarkus.io/guides/resteasy)): REST endpoint framework implementing JAX-RS and more
-
-## Provided Code
-
-### RESTEasy JAX-RS
-
-Easily start your RESTful Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
+Below will run integration test against binary created above without build and running unit tests again.
+```shell
+./gradlew quarkusIntTest -x quarkusBuild -x test
+```
